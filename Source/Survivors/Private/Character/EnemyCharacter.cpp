@@ -55,17 +55,22 @@ void AEnemyCharacter::HandleMaxHealthChanged(const FOnAttributeChangeData& Data)
 	FGameplayTagContainer EventTags;
 	OnMaxHealthChanged(Data.NewValue, EventTags);
 }
-void AEnemyCharacter::ApplyEffectToTarget(AActor* TargetActor, TSubclassOf<UGameplayEffect> GameplayEffectClass)
-{
-	UAbilitySystemComponent* TargetASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(TargetActor);
-	if (TargetASC == nullptr)
-	{
-		return;
-	}
+void AEnemyCharacter::ApplyEffectToTarget(AActor* TargetActor, TSubclassOf<UGameplayEffect> GameplayEffectClass, FGameplayTag DataTag, float Magnitude)  
+{  
+   UAbilitySystemComponent* TargetASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(TargetActor);  
+   if (TargetASC == nullptr)  
+   {  
+       return;  
+   }  
 
-	check(GameplayEffectClass);
-	FGameplayEffectContextHandle EffectContextHandle = TargetASC->MakeEffectContext();
-	EffectContextHandle.AddSourceObject(this);
-	FGameplayEffectSpecHandle EffectSpecHandle = TargetASC->MakeOutgoingSpec(GameplayEffectClass, 1, EffectContextHandle);
-	TargetASC->ApplyGameplayEffectSpecToSelf(*EffectSpecHandle.Data.Get());
+   check(GameplayEffectClass);  
+   FGameplayEffectContextHandle EffectContextHandle = TargetASC->MakeEffectContext();  
+   EffectContextHandle.AddSourceObject(this);  
+   FGameplayEffectSpecHandle EffectSpecHandle = TargetASC->MakeOutgoingSpec(GameplayEffectClass, 1, EffectContextHandle);  
+   if (EffectSpecHandle.IsValid())  
+   {  
+       FGameplayEffectSpec* Spec = EffectSpecHandle.Data.Get();  
+       Spec->SetSetByCallerMagnitude(DataTag, Magnitude);  
+       TargetASC->ApplyGameplayEffectSpecToSelf(*Spec);  
+   }  
 }
