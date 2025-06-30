@@ -28,8 +28,6 @@ void AChitaPlayerState::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// Restore attributes if transitioning from another level
-	//AttributeSet->RestoreAttributes();
 }
 
 void AChitaPlayerState::HandleHealthChanged(const FOnAttributeChangeData& Data)
