@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "Engine/GameInstance.h"
+#include "Containers/Map.h" 
+#include "GAS/ChitaAttributeSet.h"
 #include "SurvivorGameInstance.generated.h"
 
 /**
@@ -14,6 +16,8 @@ class SURVIVORS_API USurvivorGameInstance : public UGameInstance
 {
 	GENERATED_BODY()
 public:
-	UPROPERTY(BlueprintReadWrite, Category = "Saved Data")
-	float SavedHealth = 0.f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Saved Data")
+	TMap<FGameplayAttribute, float> SavedAttributes;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Saved Data")
+	bool bIsInRoom = false;
 };

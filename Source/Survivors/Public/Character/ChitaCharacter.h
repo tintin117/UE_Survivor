@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Character/ChitaCharacterBase.h"
+#include <SurvivorGameInstance.h>
 #include "ChitaCharacter.generated.h"
 
 /**
@@ -26,4 +27,5 @@ public:
 	
 private:
 	void InitAbilityActorInfo();
+	void ApplySaveData();
 };

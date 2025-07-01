@@ -2,7 +2,6 @@
 
 
 #include "Character/ChitaCharacterBase.h"
-#include <SurvivorGameInstance.h>
 
 
 // Sets default values
@@ -37,12 +36,5 @@ void AChitaCharacterBase::InitializeDefaultAttributes()
 {
 	ApplyEffectToSelf(DefaultPrimaryAttributes, 1.f);
 	//ApplyEffectToSelf(DefaultSecondaryAttributes, 1.f);
-	USurvivorGameInstance* GI = Cast<USurvivorGameInstance>(GetGameInstance());
-	if (GI)
-	{
-		//UAbilitySystemComponent* ASC = GetAbilitySystemComponent();
-		//FGameplayAttribute CurrentHealth = 
-		//GetAbilitySystemComponent()->SetNumericAttributeBase(AttributeSet->GetCurrentHealthAttribute(), GI->SavedHealth);
-	}
 }
 

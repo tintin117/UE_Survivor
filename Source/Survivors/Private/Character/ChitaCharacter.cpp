@@ -41,6 +41,20 @@ void AChitaCharacter::InitAbilityActorInfo()
   }  
   InitializeDefaultAttributes();  
   GiveDefaultAbilities();  
+  ApplySaveData();
+}
+
+void AChitaCharacter::ApplySaveData()
+{
+	USurvivorGameInstance* GI = Cast<USurvivorGameInstance>(GetGameInstance());
+	if (GI->bIsInRoom)
+	{
+		UAbilitySystemComponent* ASC = GetAbilitySystemComponent();
+		for (const TPair<FGameplayAttribute, float>& Pair : GI->SavedAttributes) {
+			ASC->SetNumericAttributeBase(Pair.Key, Pair.Value);
+		}
+		//ASC->SetNumericAttributeBase(UChitaAttributeSet::GetCurrentHealthAttribute(), GI->SavedHealth);
+	}
 }
 
 void AChitaCharacter::GiveDefaultAbilities()
