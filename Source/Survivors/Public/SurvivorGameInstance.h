@@ -20,4 +20,6 @@ public:
 	TMap<FGameplayAttribute, float> SavedAttributes;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Saved Data")
 	bool bIsInRoom = false;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Saved Data")
+	int CurrentWave = 1;
 };
