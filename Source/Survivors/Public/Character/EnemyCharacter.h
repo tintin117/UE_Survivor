@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Character/ChitaCharacterBase.h"
 //#include "GAS/ChitaAttributeSet.h"
+#include "StateTree.h"
 #include <GameplayEffect.h>
 #include "EnemyCharacter.generated.h"
 
@@ -17,6 +18,8 @@ class SURVIVORS_API AEnemyCharacter : public AChitaCharacterBase
 	GENERATED_BODY()
 public:
 	AEnemyCharacter();
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "AI")
+	TObjectPtr<UStateTree> AssignedStateTree;
 	//virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 
 	//UChitaAttributeSet* GetAttributeSet() const { return AttributeSet; }
