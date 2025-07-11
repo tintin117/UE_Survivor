@@ -22,7 +22,7 @@ void AGASActor::BeginPlay()
 	
 }
 
-void AGASActor::ApplyEffectToTarget(AActor* TargetActor, TSubclassOf<UGameplayEffect> GameplayEffectClass)
+void AGASActor::ApplyEffectToTarget(AActor* TargetActor, TSubclassOf<UGameplayEffect> GameplayEffectClass, FGameplayTag DataTag, float Magnitude)
 {
 	UAbilitySystemComponent* TargetASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(TargetActor);
 	if (TargetASC == nullptr)
@@ -34,7 +34,12 @@ void AGASActor::ApplyEffectToTarget(AActor* TargetActor, TSubclassOf<UGameplayEf
 	FGameplayEffectContextHandle EffectContextHandle = TargetASC->MakeEffectContext();
 	EffectContextHandle.AddSourceObject(this);
 	FGameplayEffectSpecHandle EffectSpecHandle = TargetASC->MakeOutgoingSpec(GameplayEffectClass, 1, EffectContextHandle);
-	TargetASC->ApplyGameplayEffectSpecToSelf(*EffectSpecHandle.Data.Get());
+	if (EffectSpecHandle.IsValid())
+	{
+		FGameplayEffectSpec* Spec = EffectSpecHandle.Data.Get();
+		Spec->SetSetByCallerMagnitude(DataTag, Magnitude);
+		TargetASC->ApplyGameplayEffectSpecToSelf(*Spec);
+	}
 }
 
 // Called every frame
