@@ -28,17 +28,11 @@ public:
 	void OnHealthChanged(float DeltaValue, const FGameplayTagContainer& EventTags);
 	UFUNCTION(BlueprintImplementableEvent, Category = "Health")
 	void OnMaxHealthChanged(float DeltaValue, const FGameplayTagContainer& EventTags);
+	virtual void GiveDefaultAbilities();
 
 protected:
 	virtual void BeginPlay() override;
-	//UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Abilities", meta = (AllowPrivateAccess = "true"))
-	////UPROPERTY(Replicated)
-	//UAbilitySystemComponent* AbilitySystemComponent;
 
-	//// Attribute Set that stores and manages health and other attributes, marked for replication.
-	//UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Attributes", meta = (AllowPrivateAccess = "true"))
-	////UPROPERTY(Replicated)
-	//UChitaAttributeSet* AttributeSet;
 	UFUNCTION(BlueprintCallable, Category = "GAS")
 	void ApplyEffectToTarget(AActor* TargetActor, TSubclassOf<UGameplayEffect> GameplayEffectClass, FGameplayTag DataTag, float Magnitude);
 
@@ -50,6 +44,9 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Applied Effects")
 	TSubclassOf<UGameplayEffect> InfiniteGameplayEffect;
+
+	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Abilities")
+	TArray<TSubclassOf<class UGameplayAbility>> DefaultAbilities;
 
 private:
 	void InitAbilityActorInfo();

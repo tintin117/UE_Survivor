@@ -27,7 +27,7 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	UPROPERTY();
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Abilities", meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
 
 
@@ -38,6 +38,7 @@ protected:
 	TSubclassOf<UGameplayEffect> DefaultPrimaryAttributes;
 	//UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Attributes")
 	//TSubclassOf<UGameplayEffect> DefaultSecondaryAttributes;
+	
 
 	void ApplyEffectToSelf(TSubclassOf<UGameplayEffect> GameplayEffectClass, float Level);
 	void InitializeDefaultAttributes();

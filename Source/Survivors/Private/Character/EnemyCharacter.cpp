@@ -40,6 +40,7 @@ void AEnemyCharacter::InitAbilityActorInfo()
 	AbilitySystemComponent->InitAbilityActorInfo(this, this);
 
 	InitializeDefaultAttributes();
+	GiveDefaultAbilities();
 	
 }
 void AEnemyCharacter::HandleHealthChanged(const FOnAttributeChangeData& Data)
@@ -73,4 +74,12 @@ void AEnemyCharacter::ApplyEffectToTarget(AActor* TargetActor, TSubclassOf<UGame
        Spec->SetSetByCallerMagnitude(DataTag, Magnitude);  
        TargetASC->ApplyGameplayEffectSpecToSelf(*Spec);  
    }  
+}
+void AEnemyCharacter::GiveDefaultAbilities()
+{
+	if (AbilitySystemComponent && DefaultAbilities.Num() > 0) {
+		for (TSubclassOf<UGameplayAbility>& Ability : DefaultAbilities) {
+			AbilitySystemComponent->GiveAbility(FGameplayAbilitySpec(Ability.GetDefaultObject(), 1, 0));
+		}
+	}
 }
