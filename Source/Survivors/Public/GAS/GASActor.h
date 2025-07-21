@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "GameplayEffectTypes.h"  
+#include "Abilities/GameplayAbilityTargetTypes.h"  
 #include "GASActor.generated.h"
 
 class UGameplayEffect;
@@ -23,6 +25,10 @@ protected:
 
 	UFUNCTION(BlueprintCallable, Category = "GAS")
 	void ApplyEffectToTarget(AActor* TargetActor, TSubclassOf<UGameplayEffect> GameplayEffectClass, FGameplayTag DataTag, float Magnitude);
+
+	UFUNCTION(BlueprintCallable, Category = "GAS")
+	void ApplyGameplayEffectSpecToTarget(FGameplayEffectSpecHandle SpecHandle, AActor* TargetActor);
+
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Applied Effects")
 	TSubclassOf<UGameplayEffect> InstantGameplayEffect;

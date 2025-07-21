@@ -42,6 +42,21 @@ void AGASActor::ApplyEffectToTarget(AActor* TargetActor, TSubclassOf<UGameplayEf
 	}
 }
 
+void AGASActor::ApplyGameplayEffectSpecToTarget(FGameplayEffectSpecHandle SpecHandle, AActor* TargetActor)  
+{  
+   UAbilitySystemComponent* TargetASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(TargetActor);  
+   if (TargetASC == nullptr || !SpecHandle.IsValid())  
+   {  
+       return;  
+   }  
+
+   const FGameplayEffectSpec* Spec = SpecHandle.Data.Get();  
+   if (Spec)  
+   {  
+       TargetASC->ApplyGameplayEffectSpecToSelf(*Spec);  
+   }  
+}
+
 // Called every frame
 void AGASActor::Tick(float DeltaTime)
 {

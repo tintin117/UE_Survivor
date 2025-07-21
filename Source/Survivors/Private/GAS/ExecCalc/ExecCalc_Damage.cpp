@@ -62,7 +62,7 @@ void UExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExecuti
 	SourceCritMod = FMath::Max<float>(SourceCritMod, 0.0f);
 
 
-	const bool bIsCrit = FMath::RandRange(0, 1) < SourceCritChance;
+	const bool bIsCrit = FMath::RandRange(0, 1) <= SourceCritChance;
 	Damage = bIsCrit ? Damage * SourceCritMod : Damage;
 
 	Damage = Damage * (1 - TargetArmor);
