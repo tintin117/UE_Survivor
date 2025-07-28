@@ -33,7 +33,7 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Data")
     UDataTable* DataTable;
 
-    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Data")
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
     FName RowName;
 
     // Editable array of cost GEs
@@ -41,7 +41,7 @@ public:
     TArray<TSubclassOf<class UGameplayEffect>> CostGameplayEffectClasses;
 
     // Optional: total cost required (in focus-equivalent units)
-    UPROPERTY(EditDefaultsOnly, Category = "Ability|Cost")
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ability|Cost")
     float TotalAbilityCost;
 
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Damage")
